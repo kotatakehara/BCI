@@ -48,7 +48,7 @@ for i=1:iv_c1-1
     temp_C1=squeeze(C1(i,:,:));
     temp_C2=squeeze(C2(i,:,:));
     [W,l,A] = csp(temp_C1,temp_C2);
-    W(3:20,:)=[];
+    W(2:21,:)=[];
     C1_CSP(c1,:,:) = W*temp_C1;
     C2_CSP(c2,:,:) = W*temp_C2;
     c1 = c1 + 1;
@@ -56,4 +56,19 @@ for i=1:iv_c1-1
 end
 
 %分散を計算して特徴ベクトルの導出
-
+for i=1:iv_c1-1
+   temp_C1=squeeze(C1_CSP(i,:,:));
+   Var1=var(temp_C1,1,2);
+   %第三要素が行か列のどちら方向に計算するか参照している
+   feat_C1(i,:,:)=log(Var1/sum(Var1));
+end
+for i=1:iv_c2-1
+   temp_C2=squeeze(C2_CSP(i,:,:));
+   Var2=var(temp_C2,1,2);
+   %第三要素が行か列のどちら方向に計算するか参照している
+   feat_C2(i,:,:)=log(Var2/sum(Var2));
+end
+scatter(feat_C1(:,1),feat_C1(:,2));
+hold on
+scatter(feat_C2(:,1),feat_C2(:,2),'red');
+hold off
