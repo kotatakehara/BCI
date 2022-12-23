@@ -1,4 +1,8 @@
 %データの次元数を一つ減らしてまとめてフィルタリングした場合
+%稼働させる前に以下のコードをコマンドウィンドウで打つ
+%cd cvx
+%cvx_setup
+%cd ..
 clear all;
 filename = 'A01T.gdf';
 [s, HDR] = sload('A01T.gdf',0,'OVERFLOWDETECTION:OFF');
@@ -121,3 +125,7 @@ Trainlabels = zeros(120,1);
 Trainlabels(1:61,1) = 1;
 Trainlabels(61:120,1) = 2;
 [predictions,src_scores]=src(feat,Trainlabels,feat_Test_C2,0.3);
+writematrix(feat_C1,"feat_C1.txt");
+writematrix(feat_C2,"feat_C2.txt");
+writematrix(feat_Test_C1,"feat_Test_C1.txt");
+writematrix(feat_Test_C2,"feat_Test_C2.txt");
