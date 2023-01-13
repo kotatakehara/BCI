@@ -93,7 +93,5 @@ for i=1:train_nel
    feat_foot_K1(i,:,:)=log(Var2/sum(Var2));
 end
 
-scatter(feat_right_K1(:,1),feat_right_K1(:,2));
-hold on
-scatter(feat_foot_K1(:,1),feat_foot_K1(:,2),'red');
-hold off
+writematrix(feat_right_K1,'feat_right_aa_1000Hz.txt')
+writematrix(feat_foot_K1,'feat_foot_aa_1000Hz.txt')
