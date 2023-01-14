@@ -27,11 +27,11 @@ end
 A01T_left(:,:,23:25)=[];
 A01T_right(:,:,23:25)=[];
 %トレーニングデータをランダムに指定数を抜き出す(train_nel個ずつ)
-train_nel = 40;
+train_nel = 20;
 %配列の事前割り当て
 Train_left = zeros(train_nel,size(A01T_left,2),size(A01T_left,3));
 Train_right = zeros(train_nel,size(A01T_right,2),size(A01T_right,3));
-test_nel = 20;
+test_nel = 40;
 Test_left = zeros(test_nel,size(A01T_left,2),size(A01T_left,3));
 Test_right = zeros(test_nel,size(A01T_right,2),size(A01T_right,3));
 
