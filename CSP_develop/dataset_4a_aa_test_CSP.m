@@ -1,5 +1,5 @@
 clear all;
-S = load('data_set_4a_ay_1000Hz.mat');
+S = load('data_set_4a_aa_1000Hz.mat');
 cnt = S.cnt;
 pos = S.mrk.pos.';
 class = S.mrk.y.';
@@ -24,12 +24,16 @@ train_nel = 20;
 %配列の事前割り当て
 Train_right = zeros(train_nel,size(AA_C1_K1,2),size(AA_C1_K1,3));
 Train_foot = zeros(train_nel,size(AA_C2_K1,2),size(AA_C2_K1,3));
-%ランダムにデータを抜き出す際の指定するインデックス配列を作成
-random_index_right = randperm(iv_c1-1,train_nel);
-random_index_foot = randperm(iv_c2-1,train_nel);
+test_nel = 40;
+Test_right = zeros(test_nel,size(AA_C1_K1,2),size(AA_C1_K1,3));
+Test_foot = zeros(test_nel,size(AA_C2_K1,2),size(AA_C2_K1,3));
 for i=1:train_nel
-    Train_right(i,:,:) = AA_C1_K1(random_index_right(i),:,:);
-    Train_foot(i,:,:) = AA_C2_K1(random_index_foot(i),:,:);
+    Train_right(i,:,:) = AA_C1_K1(i,:,:);
+    Train_foot(i,:,:) = AA_C2_K1(i,:,:);
+end
+for i=1:test_nel
+    Test_right(i,:,:) = AA_C1_K1(i+train_nel,:,:);
+    Test_foot(i,:,:) = AA_C2_K1(i+train_nel,:,:);
 end
 
 %配列の事前割り当て
@@ -47,6 +51,15 @@ for i=1:train_nel
     temp=Train_foot(i,:,:);
     temp=squeeze(temp);
     Foot(i,:,:)=temp.';
+end
+
+for i=1:test_nel
+    temp=Test_right(i,:,:);
+    temp=squeeze(temp);
+    test_right(i,:,:)=temp.';
+    temp=Test_foot(i,:,:);
+    temp=squeeze(temp);
+    test_foot(i,:,:)=temp.';
 end
 
 %データの次元数を減らして横並びに結合したもの
@@ -93,5 +106,18 @@ for i=1:train_nel
    feat_foot_K1(i,:,:)=log(Var2/sum(Var2));
 end
 
-writematrix(feat_right_K1,'feat_right_ay_1000Hz.txt')
-writematrix(feat_foot_K1,'feat_foot_ay_1000Hz.txt')
+for i=1:test_nel
+    temp_C1=squeeze(test_right(i,:,:));
+    temp_C2=squeeze(test_foot(i,:,:));
+    temp_C1 = W*temp_C1;
+    temp_C2 = W*temp_C2;
+    Var1=var(temp_C1,1,2);
+    Var2=var(temp_C2,1,2);
+    feat_test_right(i,:,:)=log(Var1/sum(Var1));
+    feat_test_foot(i,:,:)=log(Var2/sum(Var2));
+end
+
+writematrix(feat_right_K1,'feat_right_aa_1000Hz_K0.txt')
+writematrix(feat_foot_K1,'feat_foot_aa_1000Hz_K0.txt')
+writematrix(feat_test_right,'feat_test_right_aa_1000Hz.txt')
+writematrix(feat_test_foot,'feat_test_foot_aa_1000Hz.txt')
