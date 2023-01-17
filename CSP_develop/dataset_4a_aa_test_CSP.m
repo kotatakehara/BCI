@@ -20,7 +20,7 @@ for i=1:size(class,1)
 end
 
 %トレーニングデータをランダムに指定数を抜き出す(train_nel個ずつ)
-train_nel = 20;
+train_nel = 10;
 %配列の事前割り当て
 Train_right = zeros(train_nel,size(AA_C1_K1,2),size(AA_C1_K1,3));
 Train_foot = zeros(train_nel,size(AA_C2_K1,2),size(AA_C2_K1,3));
@@ -32,8 +32,8 @@ for i=1:train_nel
     Train_foot(i,:,:) = AA_C2_K1(i,:,:);
 end
 for i=1:test_nel
-    Test_right(i,:,:) = AA_C1_K1(i+train_nel,:,:);
-    Test_foot(i,:,:) = AA_C2_K1(i+train_nel,:,:);
+    Test_right(i,:,:) = AA_C1_K1(i+10+train_nel,:,:);
+    Test_foot(i,:,:) = AA_C2_K1(i+10+train_nel,:,:);
 end
 
 %配列の事前割り当て
