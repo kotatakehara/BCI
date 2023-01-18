@@ -131,7 +131,7 @@ for i=1:test_nel
     feat_test_right(i,:,:)=log(Var2/sum(Var2));
 
 end
-writematrix(feat_left,'feat_left_A02T_K0.txt')
-writematrix(feat_right,'feat_right_A02T_K0.txt')
-writematrix(feat_test_left,'feat_test_left_A02T.txt')
-writematrix(feat_test_right,'feat_test_right_A02T.txt')
+writematrix(feat_left,'feat_left_A02T_K0_125Hz.txt')
+writematrix(feat_right,'feat_right_A02T_K0_125Hz.txt')
+writematrix(feat_test_left,'feat_test_left_A02T_125Hz.txt')
+writematrix(feat_test_right,'feat_test_right_A02T_125Hz.txt')
