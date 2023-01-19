@@ -1,13 +1,18 @@
 %データの次元数を一つ減らしてまとめてフィルタリングした場合
 clear all;
-filename = 'A01T.gdf';
-[s, HDR] = sload('A01T.gdf',0,'OVERFLOWDETECTION:OFF');
+filename = 'A09T.gdf';
+[s, HDR] = sload('A09T.gdf',0,'OVERFLOWDETECTION:OFF');
 type=HDR.EVENT.TYP;
 pos=HDR.EVENT.POS;
 dur=HDR.EVENT.DUR;
-iv_c1=1; iv_c2=1; iv_c3=1; iv_c4=1;
-for i=1:size(type,1)
-    if type(i,1)==769
+iv_c1=1; iv_c2=1; 
+s = bandpass(s,[8 15],250);
+i = 1;
+while i <= size(type,1)
+    %アーティファクト認定されたデータは省く
+    if type(i,1) == 1023
+        i = i + 1;
+    elseif type(i,1)==769
         subdata=s(pos(i,1):pos(i,1)+dur(i,1),:);
         A01T_C1(iv_c1,:,:)=subdata;
         iv_c1=iv_c1+1;
@@ -15,17 +20,9 @@ for i=1:size(type,1)
         subdata=s(pos(i,1):pos(i,1)+dur(i,1),:);
         A01T_C2(iv_c2,:,:)=subdata;
         iv_c2=iv_c2+1;
-    elseif type(i,1)==771
-        subdata=s(pos(i,1):pos(i,1)+dur(i,1),:);
-        A01T_C3(iv_c3,:,:)=subdata;
-        iv_c3=iv_c3+1;
-     elseif type(i,1)==772
-        subdata=s(pos(i,1):pos(i,1)+dur(i,1),:);
-        A01T_C4(iv_c4,:,:)=subdata;
-        iv_c4=iv_c4+1;
     end
+    i = i + 1;
 end
-%EOGを入れているので削除する
 
 A01T_C1(:,:,23:25)=[];
 A01T_C2(:,:,23:25)=[];
@@ -72,7 +69,10 @@ for i=1:iv_c1-1
     c1 = c1 + 1;
     c2 = c2 + 1;
 end
-
+scatter(C1_CSP(:,1),C1_CSP(:,2));
+hold on
+scatter(C2_CSP(:,1),C2_CSP(:,2),'red');
+hold off
 %分散を計算して特徴ベクトルの導出
 for i=1:iv_c1-1
    temp_C1=squeeze(C1_CSP(i,:,:));
@@ -80,13 +80,14 @@ for i=1:iv_c1-1
    %第三要素が行か列のどちら方向に計算するか参照している
    feat_C1(i,:,:)=log(Var1/sum(Var1));
 end
-for i=1:iv_c2-1
+for i=1:iv_c1-1
    temp_C2=squeeze(C2_CSP(i,:,:));
    Var2=var(temp_C2,1,2);
    %第三要素が行か列のどちら方向に計算するか参照している
    feat_C2(i,:,:)=log(Var2/sum(Var2));
 end
-scatter(feat_C1(:,1),feat_C1(:,2));
-hold on
-scatter(feat_C2(:,1),feat_C2(:,2),'red');
-hold off
+
+%scatter(feat_C1(:,1),feat_C1(:,2));
+%hold on
+%scatter(feat_C2(:,1),feat_C2(:,2),'red');
+%hold off
