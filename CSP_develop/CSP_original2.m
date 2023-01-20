@@ -69,10 +69,13 @@ for i=1:iv_c1-1
     c1 = c1 + 1;
     c2 = c2 + 1;
 end
+f1 = figure;
+figure(f1)
 scatter(C1_CSP(:,1),C1_CSP(:,2));
 hold on
 scatter(C2_CSP(:,1),C2_CSP(:,2),'red');
 hold off
+saveas(f1,"CSP_pass_before.pdf")
 %分散を計算して特徴ベクトルの導出
 for i=1:iv_c1-1
    temp_C1=squeeze(C1_CSP(i,:,:));
