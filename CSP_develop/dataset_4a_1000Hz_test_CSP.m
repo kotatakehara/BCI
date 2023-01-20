@@ -1,19 +1,19 @@
 clear all;
-S = load('data_set_4a_al_100Hz.mat');
+S = load('data_set_4a_av_1000Hz.mat');
 cnt = S.cnt;
 pos = S.mrk.pos.';
 class = S.mrk.y.';
 cnt= 0.1*double(cnt);
-cnt = bandpass(cnt,[8 15],100);
+cnt = bandpass(cnt,[8 15],1000);
 
 iv_c1=1; iv_c2=1;
 for i=1:size(class,1)
     if class(i,1)==1
-        subdata=cnt(pos(i,1):pos(i,1)+(3.5*100)-1,:);
+        subdata=cnt(pos(i,1):pos(i,1)+(3.5*1000)-1,:);
         AA_C1_K1(iv_c1,:,:)=subdata;
         iv_c1=iv_c1+1;
     elseif class(i,1)==2
-        subdata=cnt(pos(i,1):pos(i,1)+(3.5*100)-1,:);
+        subdata=cnt(pos(i,1):pos(i,1)+(3.5*1000)-1,:);
         AA_C2_K1(iv_c2,:,:)=subdata;
         iv_c2=iv_c2+1;
     end
@@ -117,7 +117,7 @@ for i=1:test_nel
     feat_test_foot(i,:,:)=log(Var2/sum(Var2));
 end
 
-writematrix(feat_right_K1,'feat_4a_100Hz_30/feat_right_al_100Hz_K0_30.txt')
-writematrix(feat_foot_K1,'feat_4a_100Hz_30/feat_foot_al_100Hz_K0_30.txt')
-writematrix(feat_test_right,'feat_4a_100Hz_30/feat_test_right_al_100Hz_30.txt')
-writematrix(feat_test_foot,'feat_4a_100Hz_30/feat_test_foot_al_100Hz_30.txt')
+writematrix(feat_right_K1,'feat_4a_1000Hz_30/feat_right_av_1000Hz_K0_30.txt')
+writematrix(feat_foot_K1,'feat_4a_1000Hz_30/feat_foot_av_1000Hz_K0_30.txt')
+writematrix(feat_test_right,'feat_4a_1000Hz_30/feat_test_right_av_1000Hz_30.txt')
+writematrix(feat_test_foot,'feat_4a_1000Hz_30/feat_test_foot_av_1000Hz_30.txt')

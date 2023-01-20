@@ -1,7 +1,7 @@
 %データの次元数を一つ減らしてまとめてフィルタリングした場合
 clear all;
-filename = 'A02T.gdf';
-[s, HDR] = sload('A02T.gdf',0,'OVERFLOWDETECTION:OFF');
+filename = 'A09T.gdf';
+[s, HDR] = sload('A01T.gdf',0,'OVERFLOWDETECTION:OFF');
 type=HDR.EVENT.TYP;
 pos=HDR.EVENT.POS;
 dur=HDR.EVENT.DUR;
@@ -102,5 +102,5 @@ for i=1:train_nel
    %第三要素が行か列のどちら方向に計算するか参照している
    feat_right(i,:,:)=log(Var2/sum(Var2));
 end
-writematrix(feat_left,'feat_left_A02T_125Hz.txt')
-writematrix(feat_right,'feat_right_A02T_125Hz.txt')
+writematrix(feat_left,'feat_2a_125Hz_30/feat_left_A01T_125Hz_30.txt')
+writematrix(feat_right,'feat_2a_125Hz_30/feat_right_A01T_125Hz_30.txt')

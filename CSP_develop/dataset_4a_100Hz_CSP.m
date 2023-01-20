@@ -20,7 +20,7 @@ for i=1:size(class,1)
 end
 
 %トレーニングデータをランダムに指定数を抜き出す(train_nel個ずつ)
-train_nel = 10;
+train_nel = 30;
 %配列の事前割り当て
 Train_right = zeros(train_nel,size(AA_C1_K1,2),size(AA_C1_K1,3));
 Train_foot = zeros(train_nel,size(AA_C2_K1,2),size(AA_C2_K1,3));
@@ -93,5 +93,5 @@ for i=1:train_nel
    feat_foot_K1(i,:,:)=log(Var2/sum(Var2));
 end
 
-writematrix(feat_right_K1,'feat_right_aa_100Hz.txt')
-writematrix(feat_foot_K1,'feat_foot_aa_100Hz.txt')
+writematrix(feat_right_K1,'feat_4a_100Hz_30/feat_right_aa_100Hz_30.txt')
+writematrix(feat_foot_K1,'feat_4a_100Hz_30/feat_foot_aa_100Hz_30.txt')

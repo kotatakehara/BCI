@@ -1,5 +1,5 @@
 clear all;
-S = load('data_set_4a_ay_1000Hz.mat');
+S = load('data_set_4a_aa_1000Hz.mat');
 cnt = S.cnt;
 pos = S.mrk.pos.';
 class = S.mrk.y.';
@@ -20,7 +20,7 @@ for i=1:size(class,1)
 end
 
 %トレーニングデータをランダムに指定数を抜き出す(train_nel個ずつ)
-train_nel = 20;
+train_nel = 30;
 %配列の事前割り当て
 Train_right = zeros(train_nel,size(AA_C1_K1,2),size(AA_C1_K1,3));
 Train_foot = zeros(train_nel,size(AA_C2_K1,2),size(AA_C2_K1,3));
@@ -93,5 +93,5 @@ for i=1:train_nel
    feat_foot_K1(i,:,:)=log(Var2/sum(Var2));
 end
 
-writematrix(feat_right_K1,'feat_right_ay_1000Hz.txt')
-writematrix(feat_foot_K1,'feat_foot_ay_1000Hz.txt')
+writematrix(feat_right_K1,'feat_4a_1000Hz_30/feat_right_aa_1000Hz_30.txt')
+writematrix(feat_foot_K1,'feat_4a_1000Hz_30/feat_foot_aa_1000Hz_30.txt')

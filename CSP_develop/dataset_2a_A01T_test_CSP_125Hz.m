@@ -1,7 +1,7 @@
 %データの次元数を一つ減らしてまとめてフィルタリングした場合
 clear all;
-filename = 'A02T.gdf';
-[s, HDR] = sload('A02T.gdf',0,'OVERFLOWDETECTION:OFF');
+filename = 'A06T.gdf';
+[s, HDR] = sload('A05T.gdf',0,'OVERFLOWDETECTION:OFF');
 type=HDR.EVENT.TYP;
 pos=HDR.EVENT.POS;
 dur=HDR.EVENT.DUR;
@@ -27,7 +27,7 @@ end
 A01T_left(:,:,23:25)=[];
 A01T_right(:,:,23:25)=[];
 %トレーニングデータをランダムに指定数を抜き出す(train_nel個ずつ)
-train_nel = 20;
+train_nel = 25;
 %配列の事前割り当て
 Train_left_t = zeros(train_nel,size(A01T_left,2),size(A01T_left,3));
 Train_right_t = zeros(train_nel,size(A01T_right,2),size(A01T_right,3));
@@ -131,7 +131,7 @@ for i=1:test_nel
     feat_test_right(i,:,:)=log(Var2/sum(Var2));
 
 end
-writematrix(feat_left,'feat_left_A02T_K0_125Hz.txt')
-writematrix(feat_right,'feat_right_A02T_K0_125Hz.txt')
-writematrix(feat_test_left,'feat_test_left_A02T_125Hz.txt')
-writematrix(feat_test_right,'feat_test_right_A02T_125Hz.txt')
+writematrix(feat_left,'feat_2a_125Hz_25/feat_left_A05T_K0_125Hz_25.txt')
+writematrix(feat_right,'feat_2a_125Hz_25/feat_right_A05T_K0_125Hz_25.txt')
+writematrix(feat_test_left,'feat_2a_125Hz_25/feat_test_left_A05T_125Hz_25.txt')
+writematrix(feat_test_right,'feat_2a_125Hz_25/feat_test_right_A05T_125Hz_25.txt')
