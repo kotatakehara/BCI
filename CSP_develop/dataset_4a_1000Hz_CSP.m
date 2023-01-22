@@ -1,5 +1,5 @@
 clear all;
-S = load('data_set_4a_aa_1000Hz.mat');
+S = load('data_set_4a_aw_1000Hz.mat');
 cnt = S.cnt;
 pos = S.mrk.pos.';
 class = S.mrk.y.';
@@ -93,5 +93,5 @@ for i=1:train_nel
    feat_foot_K1(i,:,:)=log(Var2/sum(Var2));
 end
 
-writematrix(feat_right_K1,'feat_4a_1000Hz_30/feat_right_aa_1000Hz_30.txt')
-writematrix(feat_foot_K1,'feat_4a_1000Hz_30/feat_foot_aa_1000Hz_30.txt')
+writematrix(feat_right_K1,'feat_4a_1000Hz_30_3/feat_right_aw_30.txt')
+writematrix(feat_foot_K1,'feat_4a_1000Hz_30_3/feat_foot_aw_30.txt')

@@ -1,5 +1,6 @@
 %データの次元数を一つ減らしてまとめてフィルタリングした場合
 clear all;
+filename = 'A04T.gdf';
 [s, HDR] = sload('A09T.gdf',0,'OVERFLOWDETECTION:OFF');
 type=HDR.EVENT.TYP;
 pos=HDR.EVENT.POS;
@@ -26,7 +27,7 @@ end
 A01T_left(:,:,23:25)=[];
 A01T_right(:,:,23:25)=[];
 %トレーニングデータをランダムに指定数を抜き出す(train_nel個ずつ)
-train_nel = 30;
+train_nel = 20;
 %配列の事前割り当て
 Train_left_t = zeros(train_nel,size(A01T_left,2),size(A01T_left,3));
 Train_right_t = zeros(train_nel,size(A01T_right,2),size(A01T_right,3));
@@ -101,7 +102,5 @@ for i=1:train_nel
    %第三要素が行か列のどちら方向に計算するか参照している
    feat_right(i,:,:)=log(Var2/sum(Var2));
 end
-writematrix(feat_left,'feat_left_A09T_30.txt')
-writematrix(feat_right,'feat_right_A09T_30.txt')
-%writematrix(feat_left,'feat_2a_125Hz_30_2/feat_left_A09T_30.txt')
-%writematrix(feat_right,'feat_2a_125Hz_30_2/feat_right_A09T_30.txt')
+writematrix(feat_left,'feat_2a_125Hz_20/feat_left_A09T_20.txt')
+writematrix(feat_right,'feat_2a_125Hz_20/feat_right_A09T_20.txt')
