@@ -2,6 +2,8 @@
 
 CSPでは、dataもしくはdataset以降の名称がどのデータを処理するためのものか記載されている
 
+名前にtestがあるものがテストデータを扱っている
+
 SVM=SVM_funtion
 
 SRC=SRC_Group_function_weight
